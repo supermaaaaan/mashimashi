@@ -1,0 +1,71 @@
+.container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-left: 450px;
+  margin-right: 30px;
+  margin-top:40px;
+  margin-bottom:100px;
+  
+}
+  
+.container h2{
+  text-align:center;
+}
+
+
+.field h2 {
+  text-align: center;
+  margin-bottom: 0px;
+  
+}
+input#user_email{
+  margin-left:60px
+
+}
+
+input#user_password{
+  margin-left:60px;
+}
+
+.field2 input#user_remember_me{
+}
+
+.fsize{
+  font-size: 12px;
+  text-align: center;
+}
+
+input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #d87417;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+
+input[type="submit"]:hover {
+  background-color: #e7a070;
+}
+
+.field2 {
+  float:left;
+  display: flex; 
+  align-items: center;
+  margin-left:60px;
+}
+
+.field2 p{
+  font-size:30p;
+  
+}
+
+.field f.check_box{
+  margin-top:20px;
+}

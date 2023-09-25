@@ -1,0 +1,91 @@
+<h1>ラーメンサイト</h1>
+<h3>ラーメン詳細</h3>
+<div class="nori">
+  <%= @nori.address %>
+  <%= @nori.shop_name %>
+  <%= @nori.price %>
+  <%= @nori.name %>
+  <%= @nori.about %>
+  <p><%= @nori.created_at %></p>
+
+  <% if user_signed_in? %>
+      <% if current_user.already_liked?(@nori) %>
+        <%= button_to nori_like_path(@nori), method: :delete do %>
+          <p>いいねを取り消す</p><%= @nori.likes.count %>
+        <% end %>
+      <% else %>
+        <%= button_to nori_likes_path(@nori), method: :post do %>
+          <p>いいね</p><%= @nori.likes.count %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>いいねの数 = </p><%= @nori.likes.count %>
+    <% end %>
+  <%= link_to "編集する", edit_nori_path(@nori.id) %>
+</div>
+
+<h2>いいねしたユーザー</h2>
+<% @nori.liked_users.each do |user| %>
+  <li><%= user.email %></li>
+<% end %>
+
+<% @nori.tags.each do |tag| %>
+    <span><%= tag.name %></span>
+<% end %>
+
+<div class="comment-wrapper">
+  <p>コメント一覧</p>
+  <% @comments.each do |c| %>
+    <div>
+      <%= c.user.email unless c.user.blank? %>
+      <br>
+      <%= c.content %>
+    </div>
+      <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@nori, @comment], local: true) do |f| %>
+      <%= f.text_area :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<div id='map'></div>
+
+<style>
+#map {
+  height: 600px;
+  width: 100%;
+}
+</style>
+
+<!-- js部分 -->
+<script>
+//初期マップの設定
+let map
+let marker
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center:  {lat: <%= @nori.lat %>, lng: <%= @nori.lng %>},
+    zoom: 15,
+  });
+
+   marker = new google.maps.Marker({
+    position:  {lat: <%= @nori.lat %>, lng: <%= @nori.lng %>},
+    map: map
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBimL6F9mKgTt69QddU3Hu6WdzQKsVhYkc&callback=initMap" async defer></script>
+
+
+
+
+<%= link_to "一覧ページラーメンに戻る", noris_path %>
+<%= link_to "編集する", edit_nori_path(@nori.id) %>

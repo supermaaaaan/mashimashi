@@ -1,0 +1,83 @@
+<%= stylesheet_link_tag 'index', :media => "all" %>
+
+<div class="img-frame">
+ <div class="img-01"></div>
+ <div class="img-02"></div>
+ <div class="img-03"></div>
+ </div>
+
+<h3>投稿を検索</h3>
+ <%= form_tag({controller:"noris",action:"index"}, method: :get) do %>
+   <%= text_field_tag :search %>
+   <%= submit_tag '検索する'  %>
+<% end %>
+
+<% if user_signed_in? %>
+  <%= link_to "マイページへ", user_path(current_user.id) %>
+<% end %>
+
+
+<%= link_to "新規ラーメン投稿ページ", new_nori_path %>
+<div class="noris-container">
+</div>
+<h3>一覧ページラーメン</h3>
+  <% @noris.each do |t| %>
+    <div class="nori">
+    <div class="main-box">
+        <div class="left-container"><%= t.user.name %></div>
+        <div class="right-container">
+    <%= image_tag t.image_url, size: "250x200" if t.image? %>
+    <%= image_tag t.user.image_url, size: "150x100" if t.user.image? %>
+
+      <%= t.user.name %>
+      <%= t.user.email %>
+      <%= t.address %>
+      <%= t.shop_name %>
+      <%= t.price %>
+      <%= t.name %>
+      <%= t.about %>
+
+      <div>
+      <h2>総合評価：
+      <span class="star-rating">
+        <span class="star-rating-front" style="width: <%= getPercent(t.hoshi) %>%;">★★★★★</span>
+        <span class="star-rating-back">★★★★★</span>
+      </span> 
+      </h2>
+      </div>
+
+
+      
+        <% if user_signed_in? %>
+          <% if current_user.already_liked?(t) %>
+              <%= button_to nori_like_path(id: t.id, nori_id: t.id), method: :delete do %>
+                  <p>いいねを取り消す</p><%= t.likes.count %>
+              <% end %>
+          <% else %>
+              <%= button_to nori_likes_path(id: t.id, nori_id: t.id), method: :post do %>
+                <p>いいね</p><%= t.likes.count %>
+              <% end %>
+          <% end %>
+        <% else %>
+        <p>いいねの数 = </p><%= t.likes.count %>
+        <% end %>
+      <%= t.created_at %>
+      <%= link_to "ラーメン詳細へ", nori_path(t.id) %>
+      <% if user_signed_in? && current_user.id == t.user_id %>
+         <%= link_to "編集する", edit_nori_path(t.id) %>
+         <%= button_to "削除する", nori_path(t.id), method: :delete %>
+      <% end %> 
+        </div>
+      </div>
+      <p class="time"><%= t.created_at %></p>
+    </div>
+  <% end %>
+</div>
+
+<%= form_tag({controller:"noris",action:"index"}, method: :get) do %>
+  <% Tag.all.each do |t| %>
+      <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+  <% end %>
+  <%= submit_tag '検索' %>
+<% end %>
+
