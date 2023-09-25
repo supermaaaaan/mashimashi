@@ -27,6 +27,16 @@ input#user_email{
 
 }
 
+input#user_name{
+  margin-left:60px
+
+}
+
+input#user_password_confirmation{
+  margin-left:60px
+
+}
+
 input#user_password{
   margin-left:60px;
 }
@@ -59,13 +69,14 @@ input[type="submit"]:hover {
   display: flex; 
   align-items: center;
   margin-left:60px;
+  margin-bottom: 10px;
 }
 
-.field2 p{
-  font-size:30p;
-  
-}
+
 
 .field f.check_box{
   margin-top:20px;
+}
+h1{
+  text-align: center;
 }
