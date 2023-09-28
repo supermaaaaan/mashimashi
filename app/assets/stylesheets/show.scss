@@ -1,3 +1,102 @@
 h1{
     font-size: 32px;
 }
+
+/*枠デザイン*/
+.profile_box {
+    margin: 2em 0;
+    border-left: solid 2px #f3670a;
+    border-right: solid 2px #f3670a;
+    border-bottom: solid 10px #f3670a;
+    border-radius: 10px;
+    }
+    .profile_box .box-title {
+    font-size: 18px;
+    line-height:1.8;
+    background: #f3670a; /*タイトルの背景色*/
+    padding: 4px;
+    text-align: center;
+    color: #FFF; /*文字色*/
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    border-radius: 10px 10px 0 0;
+    }
+    /*内容*/
+    .profile_center{
+    text-align: center;
+    margin: 10px 15px 0 0;
+    }
+   
+   .hensyuu{
+    margin-left: 20px;
+   }
+
+   ul li{
+    text-align: center;
+   }
+    
+    
+
+
+    /*自己紹介文*/
+    .profile_box p {
+    padding: 15px 20px;
+    margin: 0;
+    }
+    /*リスト*/
+    .profile_box ul {
+    padding: 0.5em 1em 0.5em 2.3em;
+    position: relative;
+    }
+    .profile_box ul li {
+    line-height: 1.5;
+    padding: 0.5em 0;
+    list-style-type: none!important;
+    }
+
+    .iine {
+        margin-left:350px;
+    }
+
+    .toukou {
+        margin-left:90px;
+    }
+
+    .zentai{
+        display:flex;
+    }
+
+    .show-container{
+        border-top: solid #e76b17;
+        margin-top: 10px;
+        padding-top: 20px;
+        background-color: #eeded4;
+    }
+
+    .show-container ul{
+        text-align: left;
+        margin-right: 1000px;
+    }
+
+    .comment-wrapper {
+        border-top: solid #e76b17;
+        margin-top: 10px;
+        padding-top: 20px;
+        background-color: #eeded4;
+    }   
+
+    .iine{
+        border-top: solid #e76b17;
+        margin-top: 10px;
+        padding-top: 20px;
+        background-color: #eeded4;
+        margin-left: 0%;
+    }
+
+    .googlemap{
+        text-align: left;
+    }
+
+    .show-container h1{
+        margin-right: 1100px;
+    }

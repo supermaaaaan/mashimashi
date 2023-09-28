@@ -8,9 +8,10 @@
     text-align: center;
   }
   .nori {
-    border-top: solid #00acee;
+    border-top: solid #e76b17;
     margin-top: 10px;
     padding-top: 20px;
+    background-color: #eeded4;
   }
   .main-box {
     margin: 5px 0;
@@ -77,4 +78,66 @@
  90% {opacity: 1;}
 100% {opacity: 0; transform: scale(1.1);}
 }
+}
+
+.kensaku-container {
+  margin: 0px auto;
+  width: 100%;
+  border: solid #b8bcc2;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #b8bcc2;
+  padding-bottom: 50px;
+}
+
+.kensaku-container li{
+  display: inline;
+  list-style: none;
+  float: left;
+  padding-left: 13px;
+  padding-bottom: 5px;
+}
+
+input[type="submit"] {
+  width: 200px;
+  font-size: 20px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+input[type="text"] {
+  width: 90%;
+  height: 40px;
+  text-align: center;
+}
+
+.kensaku input[type="submit"]{
+  margin-top: 40px;
+  margin-right: 200px;
+  margin-left: 185px;
+}
+
+.search_box {
+  display: inline-block; /* なくても大丈夫だけど、念の為 */
+  position: relative;    /* 基準値とする */
+}
+
+.right-container ul{
+  list-style: none;
+  text-align: left;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+
+.right-container{
+  margin-right: 150px;
+  
+}
+
+.left-container{
+  margin-left: 100px;
+}
+
+.link{
+  text-align: left;
 }

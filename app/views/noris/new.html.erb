@@ -1,7 +1,6 @@
 <%= stylesheet_link_tag 'new', :media => "all" %>
-
-<h1>ラーメンサイト</h1>
-<h3>新規ラーメン投稿ページ</h3>
+<div class="toukou">
+<h1>新規投稿ページ</h1>
 <%= form_for @nori do |f| %>
 
   <h5>総合評価</h5>
@@ -146,7 +145,5 @@
   <%= f.submit "投稿する" %>
   
  <% end %>
-  
-  <%= link_to "一覧に戻る", noris_path %>
-
+ </div>
   

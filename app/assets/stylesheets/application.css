@@ -26,7 +26,7 @@
     flex-direction: column;
   }
   header {
-    background-color: #00070a;
+    background-color: #0c0000;
     height: 80px;
     font-weight: bold;
     display: flex;
@@ -52,15 +52,34 @@
     list-style: none;
     margin-right: 40px;
   }
+
+  .roguout button{
+    background-color: #000;
+    box-shadow:none;
+    font-weight:30px;
+    color:#fff;
+  }
+
+  .homeicon{
+    width:4vw;
+    float:left;
+    margin-left:20px;
+  }
+
+  .home h1{
+    margin-left:100px;
+  }
+
   footer {
     color: white;
     height: 30px;
-    background-color: #000;
+    background-color: #000000;
     bottom: 0;
     width: 100%;
     display: flex;
     align-items: center;
-    position: fixed;
+    height:50px;
     justify-content: flex-end;
+    margin-top:1px;
   }
   

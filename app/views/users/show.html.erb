@@ -1,35 +1,62 @@
-<h1>  マイページ</h1>
-<p>名前 : <%= @user.name %></p>
-<p>メールアドレス : <%= @user.email %></p>
-<p>プロフィール : <%= @user.profile %></p>
-<%= image_tag @user.image_url, size: "250x200" if @user.image? %>
 
-<% if current_user.id == @user.id %>
-  <%= link_to "編集する", edit_user_registration_path %>
+<div class="profile_box">
+  <div class="box-title">MYプロフィール</div>
+  <div class="profile_center">
+<%= image_tag @user.image_url, size: "250x200" if @user.image? %> 
+  </div>
+  <ul>
+    <li>名前 : <%= @user.name %></li>
+    <li>メールアドレス：<%= @user.email %></li>
+    <li>プロフィール： <%= @user.profile %></li>
+  </ul>
+  <div class="hensyuu">
+   <% if current_user.id == @user.id %>
+   <%= link_to "編集する", edit_user_registration_path %>
+  </div>
 <% end %>
-
+</div>
+<div class="zentai">
+<div class="toukou">
 <h2>ユーザーの投稿一覧</h2>
-<% @user.noris.each do |t| %>
-  <%= t.user.name %>
-  <%= t.user.email %>
-  <%= t.address %>
-  <%= t.shop_name %>
-  <%= t.price %>
-  <%= t.name %>
-  <%= t.about %>
-<% end %>
+<br>
+<br>
+<br>
+  <% @user.noris.each do |t| %>
+      <div class="last">
+      <%= image_tag t.image_url, size: "250x200" if t.image? %>
+          <div>名前：<%= t.user.name %></div>
+          <div>メールアドレス：<%= t.user.email %></div>
+          <div>住所：<%= t.address %></div>
+          <div>ショップ名：<%= t.shop_name %></div>
+          <div>価格：<%= t.price %></div>
+          <div>商品名：<%= t.name %></div>
+          <div>投稿者コメント：<%= t.about %></div>
+          
+      <% end %>
+      </div>
+</div>
 
-<h2>ユーザーがいいねした投稿一覧</h2>
-<% @user.liked_noris.each do |t| %>
-  <%= t.user.name %>
-  <%= t.user.email %>
-  <%= t.address %>
-  <%= t.shop_name %>
-  <%= t.price %>
-  <%= t.name %>
-  <%= t.about %>
-<% end %>
+<div class="iine">
+  <h2>ユーザーがいいねした投稿一覧</h2>
+  <br>
+  <br>
+  <br>
+  <% @user.liked_noris.each do |t| %>
+    <div class="like">
+        <%= image_tag t.image_url, size: "250x200" if t.image? %>
+    </div>
+    <div class="last2">
+      <div>名前：<%= t.user.name %></div>
+      <div>メールアドレス：<%= t.user.email %></div>
+      <div>住所：<%= t.address %></div>
+      <div>ショップ名：<%= t.shop_name %></div>
+      <div>価格：<%= t.price %></div>
+      <div>商品名：<%= t.name %></div>
+      <div>投稿者コメント：<%= t.about %></div>
+    </div>
+  <% end %>
+</div>
+</div>
 <!-- ここまで-->
-
-
-<%= link_to "Tweet一覧に戻る", noris_path %>
+<br>
+<%= link_to "トップページに戻る", noris_path %>

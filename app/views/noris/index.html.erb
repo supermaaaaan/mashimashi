@@ -6,47 +6,65 @@
  <div class="img-03"></div>
  </div>
 
-<h3>投稿を検索</h3>
- <%= form_tag({controller:"noris",action:"index"}, method: :get) do %>
-   <%= text_field_tag :search %>
-   <%= submit_tag '検索する'  %>
-<% end %>
 
+
+<div class="kensaku-container">
+<h1>投稿を検索</h1>
+<br>
+<div class="search_box">
+ <%= form_tag({controller:"noris",action:"index"}, method: :get) do %>
+   <input type="text" placeholder="ここにキーワード">
+   <%= submit_tag 'キーワードで検索'  %>
+<% end %>
+</div>
+
+<div class="kensaku">
+<br>
+<%= form_tag({controller:"noris",action:"index"}, method: :get) do %>
+  <% Tag.all.each do |t| %>
+      <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+  <% end %>
+  <%= submit_tag '条件で検索' %>
+<% end %>
+</div>
+<div class="link">
 <% if user_signed_in? %>
   <%= link_to "マイページへ", user_path(current_user.id) %>
 <% end %>
 
+<% if user_signed_in? %>
+<%= link_to "新規投稿", new_nori_path %>
+<% end %>
+</div>
+</div>
 
-<%= link_to "新規ラーメン投稿ページ", new_nori_path %>
+
 <div class="noris-container">
 </div>
-<h3>一覧ページラーメン</h3>
+<h1>投稿一覧</h1>
   <% @noris.each do |t| %>
     <div class="nori">
-    <div class="main-box">
-        <div class="left-container"><%= t.user.name %></div>
-        <div class="right-container">
-    <%= image_tag t.image_url, size: "250x200" if t.image? %>
-    <%= image_tag t.user.image_url, size: "150x100" if t.user.image? %>
-
-      <%= t.user.name %>
-      <%= t.user.email %>
-      <%= t.address %>
-      <%= t.shop_name %>
-      <%= t.price %>
-      <%= t.name %>
-      <%= t.about %>
-
+      <div class="main-box">
+        <div class="left-container">
+        <%= image_tag t.image_url, size: "350x300" if t.image? %>
+      </div>
+      <div class="right-container">
+      <ul>
       <div>
-      <h2>総合評価：
+      <li><h2>総合評価：
       <span class="star-rating">
         <span class="star-rating-front" style="width: <%= getPercent(t.hoshi) %>%;">★★★★★</span>
         <span class="star-rating-back">★★★★★</span>
       </span> 
-      </h2>
+      </h2></li>
       </div>
-
-
+         <li>住所：<%= t.address %></li>
+         <li>店名：<%= t.shop_name %></li>
+         <li>価格：<%= t.price %></li>
+         <li>商品名：<%= t.name %></li>
+         <li>詳細：<%= t.about %></li>
+         <li>投稿者：<%= t.user.name %></li>
+        </ul>
       
         <% if user_signed_in? %>
           <% if current_user.already_liked?(t) %>
@@ -62,7 +80,7 @@
         <p>いいねの数 = </p><%= t.likes.count %>
         <% end %>
       <%= t.created_at %>
-      <%= link_to "ラーメン詳細へ", nori_path(t.id) %>
+      <%= link_to "詳細ページへ", nori_path(t.id),data: { turbo: false } %>
       <% if user_signed_in? && current_user.id == t.user_id %>
          <%= link_to "編集する", edit_nori_path(t.id) %>
          <%= button_to "削除する", nori_path(t.id), method: :delete %>
@@ -73,11 +91,4 @@
     </div>
   <% end %>
 </div>
-
-<%= form_tag({controller:"noris",action:"index"}, method: :get) do %>
-  <% Tag.all.each do |t| %>
-      <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
-  <% end %>
-  <%= submit_tag '検索' %>
-<% end %>
 

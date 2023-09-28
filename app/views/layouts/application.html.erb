@@ -13,27 +13,34 @@
 
   <body>
  <header>
- <h1>俺のラーメン</h1>
+ <div class="home">
+          <%= link_to noris_path do %>
+            <%= image_tag 'icon2.jpg', alt: "俺のラーメン", class: "homeicon" %>
+          <%end%>
+          <h1>俺のラーメン</h1>
+  </div>
+ 
   <div class="header-list">
    <ul>
 
-
-    <% if user_signed_in? %>
-     <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-    <% else %>
-     <li><%= link_to "新規登録", new_user_registration_path %></li>
-     <li><%= link_to "ログイン", new_user_session_path %></li>
-    <% end %>
-   </ul>
+    <div class="roguout">
+      <% if user_signed_in? %>
+      <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+      <li><%= link_to "新規登録", new_user_registration_path %></li>
+      <li><%= link_to "ログイン", new_user_session_path %></li>
+      <% end %>
+      </ul>
+    </div>
   </div>
  </header>
  <main>
   <%= yield %>
  </main>
 
- <footer>
- <p>Copyright © GeekSalon All Rights Reserved.</p>
-</footer>
+  <footer>
+    <p>Copyright © 俺のラーメン All Rights Reserved.</p>
+  </footer>
 
 </body>
 

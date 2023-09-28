@@ -1,11 +1,17 @@
-<h1>ラーメンサイト</h1>
-<h3>ラーメン詳細</h3>
-<div class="nori">
-  <%= @nori.address %>
-  <%= @nori.shop_name %>
-  <%= @nori.price %>
-  <%= @nori.name %>
-  <%= @nori.about %>
+
+<div class="show-container">
+<h1>投稿の詳細</h1>
+<br>
+  投稿者：<%= @nori.user.name %>
+  住所：<%= @nori.address %> 
+  店名：<%= @nori.shop_name %>
+  価格：<%= @nori.price %>
+  商品名：<%= @nori.name %>
+  詳細：<%= @nori.about %>
+  タグ：<% @nori.tags.each do |tag| %>
+    <span><%= tag.name %></span>
+  <% end %>
+
   <p><%= @nori.created_at %></p>
 
   <% if user_signed_in? %>
@@ -21,39 +27,11 @@
     <% else %>
       <p>いいねの数 = </p><%= @nori.likes.count %>
     <% end %>
-  <%= link_to "編集する", edit_nori_path(@nori.id) %>
-</div>
-
-<h2>いいねしたユーザー</h2>
-<% @nori.liked_users.each do |user| %>
-  <li><%= user.email %></li>
-<% end %>
-
-<% @nori.tags.each do |tag| %>
-    <span><%= tag.name %></span>
-<% end %>
-
-<div class="comment-wrapper">
-  <p>コメント一覧</p>
-  <% @comments.each do |c| %>
-    <div>
-      <%= c.user.email unless c.user.blank? %>
-      <br>
-      <%= c.content %>
-    </div>
-      <br>
-  <% end %>
-
   <% if user_signed_in? %>
-    <%= form_with(model: [@nori, @comment], local: true) do |f| %>
-      <%= f.text_area :content %>
-      <%= button_tag type: "submit" do %>
-        <i class="far fa-comments"></i> コメントする
-      <% end %>
-    <% end %>
+    <%= link_to "編集する", edit_nori_path(@nori.id) %>
   <% end %>
 </div>
-
+<div class="googlemap">
 <div id='map'></div>
 
 <style>
@@ -83,9 +61,36 @@ function initMap(){
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBimL6F9mKgTt69QddU3Hu6WdzQKsVhYkc&callback=initMap" async defer></script>
+</div>
+
+<div class="iine">
+<h2>いいねしたユーザー</h2>
+<% @nori.liked_users.each do |user| %>
+  <li><%= user.email %></li>
+<% end %>
+</div>
+
+<div class="comment-wrapper">
+  <h2>コメント一覧</h2>
+  <% @comments.each do |c| %>
+    <div>
+      <%= c.user.email unless c.user.blank? %>
+      <br>
+      <%= c.content %>
+    </div>
+      <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@nori, @comment], local: true) do |f| %>
+      <%= f.text_area :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+</div>
 
 
 
-
-<%= link_to "一覧ページラーメンに戻る", noris_path %>
-<%= link_to "編集する", edit_nori_path(@nori.id) %>
